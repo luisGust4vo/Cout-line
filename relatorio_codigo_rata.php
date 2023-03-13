@@ -5,22 +5,22 @@ chdir($path);
 $arquivos = glob("{T*.php}", GLOB_BRACE);
 foreach ($arquivos as $nome_arquivo) {
     $arquivo = fopen( $nome_arquivo, 'r' );
-    if ($arquivo == false) die('Não foi possível abrir o arquivo.');
+    if ($arquivo == false) die('NÃ£o foi possÃ­vel abrir o arquivo.');
 
     $quant = 0;
     while(!feof($arquivo)) {
         $linha = fgets($arquivo);
         if(strlen(trim($linha)) > 0) { 
             $quant++;  
-            // if (((strpos($linha, "<script>") !== false) ||
-            //  (strpos($linha, "</script>") !== false) ||
-            //   (strpos($linha, "function ") !== false) ||
-            //    (strpos($linha, "case") !== false) ||
-            //      (strpos($linha, '<script type = "text/javascript">') !== false))
-            //      && (strpos($linha, 'src="') == false)
-            //      ) {
-            //     echo $linha .'';
-            // }        
+            if (((strpos($linha, "<script>") !== false) ||
+             (strpos($linha, "</script>") !== false) ||
+              (strpos($linha, "function ") !== false) ||
+               (strpos($linha, "case") !== false) ||
+                 (strpos($linha, '<script type = "text/javascript">') !== false))
+                 && (strpos($linha, 'src="') == false)
+                 ) {
+                echo $linha .'';
+            }        
         }
     } 
     fclose($arquivo);
